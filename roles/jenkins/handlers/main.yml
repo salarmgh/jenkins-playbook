@@ -1,0 +1,2 @@
+- name: restart jenkins
+  include: restart_jenkins.yml

@@ -1,0 +1,11 @@
+---
+java_package: "openjdk-11-jre"
+java_version: "11.0.6*"
+jenkins_package: "jenkins"
+jenkins_version: "2.204.2"
+jenkins_apt_repository: deb https://pkg.jenkins.io/debian-stable binary/
+jenkins_package_state: present
+
+jenkins_service_state: started
+jenkins_service_enabled: true
+jenkins_restart_handler_state: reloaded

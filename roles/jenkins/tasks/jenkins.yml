@@ -1,0 +1,35 @@
+---
+- name: Ensure dependencies are installed.
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - gnupg2
+    state: present
+
+- name: Install java.
+  apt:
+    name: "{{ java_package }}={{ java_version }}"
+    state: present
+
+- name: Add Jenkins apt key.
+  apt_key:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+    state: present
+
+- name: Add Jenkins repository.
+  apt_repository:
+    repo: "{{ jenkins_apt_repository }}"
+    state: present
+    update_cache: true
+
+- name: Install Jenkins.
+  apt:
+    name: "{{ jenkins_package }}={{ jenkins_version }}"
+    state: "{{ jenkins_package_state }}"
+
+- name: Ensure Jenkins is started and enabled at boot.
+  service:
+    name: jenkins
+    state: "{{ jenkins_service_state }}"
+    enabled: "{{ jenkins_service_enabled }}"
